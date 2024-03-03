@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b054fa42d29f6f49944bd3c25b12ca5, type: 3}
+  m_Name: Character Stats
+  m_EditorClassIdentifier: 
+  CharacterLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 641
+  MaxSpeed: 8
+  Acceleration: 90
+  GroundingForce: -5.67
+  RotationSmoothTime: 0.15
+  JumpPower: 18
+  MaxFallSpeed: 25
+  FallAcceleration: 45
+  JumpEndEarlyGravityModifier: 10
+  CoyoteTime: 0.15
+  JumpBuffer: 0.1
+  DashSpeed: 20
+  DashDuration: 0.1
+  DashSlowdownDuration: 1
+  SlowdownDistanceTrigger: 8
