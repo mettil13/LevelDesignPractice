@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Key : MonoBehaviour
 {
     public int Value;
     [SerializeField] private InventorySO _inventory;
 
     private void OnTriggerEnter(Collider other)
     {
-        _inventory.AddCoin(Value);
+        _inventory.AddKey(Value);
         Destroy(gameObject);
     }
 }

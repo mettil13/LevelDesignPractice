@@ -20,8 +20,10 @@ MonoBehaviour:
     m_Bits: 641
   MaxSpeed: 8
   Acceleration: 90
-  GroundingForce: -5.67
+  GroundingForce: -3.33
   RotationSmoothTime: 0.15
+  SlopeLimit: 50.9
+  SlopeFallPower: 6
   JumpPower: 18
   MaxFallSpeed: 25
   FallAcceleration: 45

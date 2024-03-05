@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 7671802666577752224}
   m_Layer: 6
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -426,7 +426,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -498,6 +498,8 @@ MonoBehaviour:
   _groundCollisionSphere: {fileID: 8724913455684724477}
   _collisionCheckRadius: 0.5
   _magneticActionCooldown: 1
+  PushUnlocked: 1
+  PullUnlocked: 1
 --- !u!1 &8832899277642455596
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +561,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3033667219593020291, guid: 656b3f488a0cfab4f8a8248b9aaa2f51, type: 3}
+  - {fileID: 2100000, guid: f3554b938f5bc274694c4707c1012492, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

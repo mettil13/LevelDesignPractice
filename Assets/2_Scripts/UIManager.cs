@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private InventorySO _inventory;
-    [SerializeField] private TextMeshProUGUI _itemNumber;
+    [SerializeField] private TextMeshProUGUI _coinNumber;
+    [SerializeField] private TextMeshProUGUI _keyNumber;
+    [SerializeField] private TextMeshProUGUI _infoText;
+    [SerializeField] private GameObject _infoBox;
 
     private void Awake()
     {
@@ -19,6 +23,12 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateText()
     {
-        _itemNumber.text = _inventory.OwnedNumber.ToString();
+        _coinNumber.text = _inventory.NumberOfCoins.ToString();
+        _keyNumber.text = _inventory.NumberOfKeys.ToString();
+    }
+    public void ShowText(bool b, string textToShow)
+    {
+        _infoText.text = textToShow;
+        _infoBox.SetActive(b);
     }
 }

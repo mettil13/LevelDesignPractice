@@ -16,7 +16,7 @@ public class ButtonObject : MonoBehaviour
     public float TimeItStaysOn;
 
     [Header("Paid")]
-    public int Cost;
+    public int KeyCost;
     public InventorySO Inventory;
     public TextMeshPro CostText;
     private MeshRenderer _mesh;
@@ -61,9 +61,9 @@ public class ButtonObject : MonoBehaviour
             case ButtonType.Paid:
                 if (other.TryGetComponent(out CharacterController3D character))
                 {
-                    Cost -= Inventory.Pay(Cost);
+                    KeyCost -= Inventory.PayKey(KeyCost);
                     UpdateCostText();
-                    if (Cost == 0)
+                    if (KeyCost == 0)
                     {
                         Activate(true);
                     }
@@ -101,7 +101,7 @@ public class ButtonObject : MonoBehaviour
     }
     private void UpdateCostText()
     {
-        CostText.text = Cost.ToString();
+        CostText.text = KeyCost.ToString();
     }
 }
 

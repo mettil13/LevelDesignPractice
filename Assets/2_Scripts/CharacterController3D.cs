@@ -7,6 +7,8 @@ public class CharacterController3D : MonoBehaviour
     [SerializeField] private Transform _groundCollisionSphere;
     [SerializeField] private float _collisionCheckRadius;
     [SerializeField] private float _magneticActionCooldown;
+    public bool PushUnlocked;
+    public bool PullUnlocked;
 
     private CharacterController _controller;
     private InputManager _input;
@@ -16,10 +18,13 @@ public class CharacterController3D : MonoBehaviour
     private float _rotationVelocity;
     private float _verticalVelocity;
     private Vector3 _targetDirection;
+    private Vector3 _slopeDirection;
     private RaycastHit _dashHit;
+    private RaycastHit _groundHit;
+    private bool _onSlope;
 
     private float _frameLeftGrounded = float.MinValue;
-    private bool _grounded;
+    public bool _grounded;
     private bool _jumpToConsume;
     private bool _bufferedJumpUsable;
     private bool _endedJumpEarly;
@@ -54,8 +59,6 @@ public class CharacterController3D : MonoBehaviour
     private void Update()
     {
         GatherInput();
-
-
     }
     private void FixedUpdate()
     {
@@ -78,12 +81,12 @@ public class CharacterController3D : MonoBehaviour
             _newJumpPress = false;
         }
 
-        if (_input.Action1 && _magneticActionCooldownTimer >= _magneticActionCooldown)
+        if (PushUnlocked && _input.Action1 && _magneticActionCooldownTimer >= _magneticActionCooldown)
         {
             _magneticPull = false;
             ExecuteMagneticAction();
         }
-        else if (_input.Action2 && _magneticActionCooldownTimer >= _magneticActionCooldown)
+        else if (PullUnlocked && _input.Action2 && _magneticActionCooldownTimer >= _magneticActionCooldown)
         {
             _magneticPull = true;
             ExecuteMagneticAction();
@@ -104,7 +107,25 @@ public class CharacterController3D : MonoBehaviour
     }
     private void CheckCollisions()
     {
-        bool groundHit = Physics.CheckSphere(_groundCollisionSphere.position, _collisionCheckRadius, _stats.GroundLayer, QueryTriggerInteraction.Ignore);
+        // bool groundHit = Physics.CheckSphere(_groundCollisionSphere.position, _collisionCheckRadius, _stats.GroundLayer, QueryTriggerInteraction.Ignore);
+        bool groundHit = false;
+        if (Physics.SphereCast(transform.position/*  + Vector3.down * _controller.height / 2 */, _collisionCheckRadius, Vector3.down, out _groundHit, 1.2f, _stats.GroundLayer))
+        {
+            float slopeAngle = Vector3.Angle(_groundHit.normal, Vector3.up);
+            if (slopeAngle < _stats.SlopeLimit)
+            {
+                groundHit = true;
+                _slopeDirection = Vector3.zero;
+                _onSlope = false;
+            }
+            else
+            {
+                _slopeDirection = _groundHit.normal;
+                _slopeDirection.y = 0;
+                _onSlope = true;
+            }
+        }
+
 
         // Landed on the Ground
         if (!_grounded && groundHit)
@@ -221,6 +242,7 @@ public class CharacterController3D : MonoBehaviour
         }
 
         _targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+        if (_onSlope) _targetDirection = Vector3.zero;
     }
     private void HandleGravity()
     {
@@ -246,7 +268,7 @@ public class CharacterController3D : MonoBehaviour
         }
         else
         {
-            _controller.Move((_targetDirection.normalized * _currentSpeed + new Vector3(0.0f, _verticalVelocity, 0.0f) + _dashDirection * _stats.DashSpeed) * Time.fixedDeltaTime);
+            _controller.Move((_targetDirection.normalized * _currentSpeed + new Vector3(0.0f, _verticalVelocity, 0.0f) + _dashDirection * _stats.DashSpeed + _slopeDirection * _stats.SlopeFallPower) * Time.fixedDeltaTime);
         }
     }
 }

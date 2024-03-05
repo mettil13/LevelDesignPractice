@@ -24,6 +24,10 @@ public class CharacterStatsSO : ScriptableObject
     public float RotationSmoothTime = 0.12f;
     /* [Tooltip("How much you can control movement while in air (fraction of Max Speed)"), Range(0.0f, 1f)]
     public float InAirManeuverability = 0.6f; */
+    [Tooltip("Max slope angle in degrees"), Range(0.0f, 90f)]
+    public float SlopeLimit = 45f;
+    [Tooltip("Force applied when on a slope"), Range(0.0f, 30f)]
+    public float SlopeFallPower = 10f;
 
     [Header("JUMP")]
     [Tooltip("The immediate velocity applied when jumping")]

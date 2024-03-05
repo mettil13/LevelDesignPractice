@@ -124,7 +124,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 129
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -147,17 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60abf7a775778d44fa047a501046ae5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCollisionSphere: {fileID: 8357861154828637976}
-  _collisionCheckRadius: 0.45
   DashSpeedRatio: 0.8
   DashDurationRatio: 0.8
   DashStopLayer:
     serializedVersion: 2
     m_Bits: 1
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _grounded: 0
 --- !u!1 &2862616050046333958
 GameObject:
   m_ObjectHideFlags: 0

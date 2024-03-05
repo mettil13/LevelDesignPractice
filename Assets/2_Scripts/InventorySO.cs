@@ -6,29 +6,36 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class InventorySO : ScriptableObject
 {
-    public int OwnedNumber;
+    public int NumberOfCoins;
+    public int NumberOfKeys;
     public UnityAction OnNumberChange;
     private void OnEnable()
     {
-        OwnedNumber = 0;
+        NumberOfCoins = 0;
+        NumberOfKeys = 0;
     }
-    public void Add(int value)
+    public void AddCoin(int value)
     {
-        OwnedNumber += value;
+        NumberOfCoins += value;
         OnNumberChange?.Invoke();
     }
-    public int Pay(int value)
+    public void AddKey(int value)
+    {
+        NumberOfKeys += value;
+        OnNumberChange?.Invoke();
+    }
+    public int PayKey(int value)
     {
         int paidValue = 0;
-        if (OwnedNumber > value)
+        if (NumberOfCoins > value)
         {
             paidValue = value;
-            Add(-value);
+            AddKey(-value);
         }
         else
         {
-            paidValue = OwnedNumber;
-            Add(-OwnedNumber);
+            paidValue = NumberOfCoins;
+            AddKey(-NumberOfCoins);
         }
 
         return paidValue;

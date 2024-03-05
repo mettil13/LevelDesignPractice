@@ -32,7 +32,6 @@ public class ObjectGroupToggle : MonoBehaviour
         {
             bool newState;
             newState = active ? !_objectsStartingStates[i] : _objectsStartingStates[i];
-            print(GameObjectsToToggle[i].name + ": " + newState);
             GameObjectsToToggle[i].SetActive(newState);
         }
     }
